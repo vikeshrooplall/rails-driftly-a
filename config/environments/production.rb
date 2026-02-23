@@ -1,15 +1,15 @@
 require "active_support/core_ext/integer/time"
 
-if ENV['SECRET_KEY_BASE'].present?
-  config.secret_key_base = ENV['SECRET_KEY_BASE']
-end
-
-# Configure ActiveRecord Encryption for production
-config.active_record.encryption.primary_key = ENV['ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY'] || "0" * 32
-config.active_record.encryption.deterministic_key = ENV['ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY'] || "0" * 32
-config.active_record.encryption.key_derivation_salt = ENV['ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT'] || "0" * 32
 
 Rails.application.configure do
+  if ENV['SECRET_KEY_BASE'].present?
+    config.secret_key_base = ENV['SECRET_KEY_BASE']
+  end
+
+  # Configure ActiveRecord Encryption for production
+  config.active_record.encryption.primary_key = ENV['ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY'] || "0" * 32
+  config.active_record.encryption.deterministic_key = ENV['ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY'] || "0" * 32
+  config.active_record.encryption.key_derivation_salt = ENV['ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT'] || "0" * 32
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
