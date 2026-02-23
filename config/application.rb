@@ -15,18 +15,6 @@ module RailsDriftlyAirbnb
       end
     end
 
-    # IMPORTANT: Configure encryption BEFORE load_defaults
-    # but don't set encryption = false yet
-    if Rails.env.production?
-      # First configure encryption with dummy values
-      config.active_record.encryption.primary_key = "0" * 32
-      config.active_record.encryption.deterministic_key = "0" * 32
-      config.active_record.encryption.key_derivation_salt = "0" * 32
-
-      # Then disable it
-      config.active_record.encryption = false
-    end
-
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
