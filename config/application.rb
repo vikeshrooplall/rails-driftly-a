@@ -8,6 +8,12 @@ Bundler.require(*Rails.groups)
 
 module RailsDriftlyAirbnb
   class Application < Rails::Application
+    config.before_initialize do
+      if Rails.env.production?
+        ENV['SECRET_KEY_BASE'] ||= ENV['RAILS_MASTER_KEY']
+        Devise.secret_key = ENV['DEVISE_SECRET_KEY'] if defined?(Devise)
+      end
+    end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
@@ -23,10 +29,5 @@ module RailsDriftlyAirbnb
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.before_configuration do
-      if Rails.env.production?
-        ENV['SECRET_KEY_BASE'] ||= ENV['RAILS_MASTER_KEY']
-      end
-    end
   end
 end
