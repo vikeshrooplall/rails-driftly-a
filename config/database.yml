@@ -4,6 +4,9 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem "sqlite3"
 #
+# PostgreSQL configuration for Render deployment
+# SQLite remains for development and test only
+#
 default: &default
   adapter: sqlite3
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -20,6 +23,13 @@ test:
   <<: *default
   database: storage/test.sqlite3
 
+# Production uses PostgreSQL on Render
+# The DATABASE_URL environment variable is automatically provided by Render
+# when you create a PostgreSQL database
+
 production:
-  <<: *default
-  database: storage/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV['DATABASE_URL'] %>
+  # database: storage/production.sqlite3
