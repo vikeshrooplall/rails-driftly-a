@@ -81,3 +81,4 @@ gem "bootstrap", "~> 5.3.3"
 
 gem 'geocoder'
 gem "solid_cable"
+gem "ostruct", "~> 0.6.0"
