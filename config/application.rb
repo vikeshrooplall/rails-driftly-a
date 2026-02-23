@@ -23,5 +23,10 @@ module RailsDriftlyAirbnb
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.before_configuration do
+      if Rails.env.production?
+        ENV['SECRET_KEY_BASE'] ||= ENV['RAILS_MASTER_KEY']
+      end
+    end
   end
 end
