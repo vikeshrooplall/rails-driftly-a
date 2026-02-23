@@ -14,6 +14,8 @@ module RailsDriftlyAirbnb
         Devise.secret_key = ENV['DEVISE_SECRET_KEY'] if defined?(Devise)
       end
     end
+
+    config.active_record.encryption = false if Rails.env.production?
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
